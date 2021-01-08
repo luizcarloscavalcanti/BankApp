@@ -65,7 +65,6 @@
         android:shadowDy="3"
         android:shadowRadius="30"
         android:text="Login"
-        android:onClick="clickBotaoLogin"
         app:backgroundTint="#3B48EE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
