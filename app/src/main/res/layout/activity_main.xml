@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/textUser"
+        android:id="@+id/editTextUser"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:layout_marginStart="17dp"
@@ -30,14 +30,14 @@
         android:layout_marginBottom="386dp"
         android:ems="10"
         android:hint="User"
-        android:inputType="textPersonName"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/textPassword"
+        android:id="@+id/editTextPassword"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:layout_marginStart="17dp"
@@ -65,6 +65,7 @@
         android:shadowDy="3"
         android:shadowRadius="30"
         android:text="Login"
+        android:onClick="clickBotaoLogin"
         app:backgroundTint="#3B48EE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
