@@ -5,4 +5,7 @@
     <string name="labelData">12/12/2018</string>
     <string name="labelValor">R$1.000,00</string>
     <string name="labelRecentes">Recentes</string>
+
+    <string name="loginError">Usuário ou Senha inválidos</string>
+    <string name="loginSuccess">Logado com sucesso</string>
 </resources>
