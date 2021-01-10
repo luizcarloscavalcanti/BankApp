@@ -4,8 +4,14 @@
     <string name="labelDescricao">Conta de luz</string>
     <string name="labelData">12/12/2018</string>
     <string name="labelValor">R$1.000,00</string>
-    <string name="labelRecentes">Recentes</string>
+    <string name="labelRecents">Recentes</string>
 
     <string name="loginError">Usuário ou Senha inválidos</string>
     <string name="loginSuccess">Logado com sucesso</string>
+
+    <string name="labelNameUser">Nome do Usuario</string>
+    <string name="labelAccount">Conta</string>
+    <string name="labelNumAccount">0000 / 00.000000-0</string>
+    <string name="labelBalance">Saldo</string>
+    <string name="labelNumBalance">R$0.000,00</string>
 </resources>
