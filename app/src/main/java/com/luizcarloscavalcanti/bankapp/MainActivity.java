@@ -2,6 +2,7 @@ package com.luizcarloscavalcanti.bankapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,16 +10,15 @@ import android.widget.Toast;
 
 import com.luizcarloscavalcanti.bankapp.model.LoginResponse;
 import com.luizcarloscavalcanti.bankapp.service.RetrofitClient;
+import com.luizcarloscavalcanti.bankapp.service.LoginSessionManager;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private static String CPF_REGEX = "(^[0-9]+$)";
-    private static String EMAIL_REGEX = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-    private static String PASSWORD_REGEX = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
 
     EditText editTextUser, editTextPassword;
 
@@ -30,6 +30,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextUser = findViewById(R.id.editTextUser);
         editTextPassword = findViewById(R.id.editTextPassword);
         findViewById(R.id.buttonLogin).setOnClickListener(this);
+
+        LoginSessionManager loginSessionManager = new LoginSessionManager(MainActivity.this);
+        HashMap<String, String> loginDetails = loginSessionManager.getLoginDetail();
+
+        editTextUser.setText(loginDetails.get(LoginSessionManager.USER));
+        editTextPassword.setText(loginDetails.get(LoginSessionManager.PASSWORD));
+
+        if (loginSessionManager.checkLogin()) {
+            submitLogin();
+        }
     }
 
     private void submitLogin() {
@@ -46,9 +56,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 LoginResponse loginResponse = response.body();
 
                 if (validatePassword(password) && validateUser(user)) {
-                    Toast.makeText(MainActivity.this, R.string.loginSuccess, Toast.LENGTH_SHORT).show();
+                    LoginSessionManager loginSessionManager = new LoginSessionManager(MainActivity.this);
+                    loginSessionManager.createLoginSession(user, password);
+
+                    Intent intent = new Intent(MainActivity.this, StatementActivity.class);
+                    intent.putExtra("userName", loginResponse.getUserAccount().getName());
+                    intent.putExtra("userAgency", loginResponse.getUserAccount().getAgency());
+                    intent.putExtra("userBankAccount", loginResponse.getUserAccount().getBankAccount());
+                    intent.putExtra("userBankBalance", loginResponse.getUserAccount().getBalance());
+
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, R.string.loginError, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, R.string.loginError, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -58,20 +77,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public static boolean validateUser(String user) {
-        boolean validateCPF = user
-                .matches(CPF_REGEX) && user.length() == 11;
 
-        boolean validateEmail = user
-                .matches(EMAIL_REGEX);
+        String CPF_REGEX = "(^[0-9]+$)";
+        String EMAIL_REGEX = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+        boolean validateCPF = user.matches(CPF_REGEX) && user.length() == 11;
+        boolean validateEmail = user.matches(EMAIL_REGEX);
 
         return validateCPF || validateEmail;
     }
 
     public static boolean validatePassword(String password) {
-        boolean validatePassword = password
-                .matches(PASSWORD_REGEX);
 
-        return validatePassword;
+        String PASSWORD_REGEX = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+
+        return password.matches(PASSWORD_REGEX);
     }
 
     public void onClick(View view) {
