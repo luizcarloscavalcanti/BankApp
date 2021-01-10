@@ -35,10 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         HashMap<String, String> loginDetails = loginSessionManager.getLoginDetail();
 
         editTextUser.setText(loginDetails.get(LoginSessionManager.USER));
-        editTextPassword.setText(loginDetails.get(LoginSessionManager.PASSWORD));
 
         if (loginSessionManager.checkLogin()) {
-            submitLogin();
+            Intent intent = new Intent(MainActivity.this, StatementsActivity.class);
+            startActivity(intent);
+            this.finish();
         }
     }
 
@@ -56,18 +57,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 LoginResponse loginResponse = response.body();
 
                 if (validatePassword(password) && validateUser(user)) {
+                    assert loginResponse != null;
+                    String userId = loginResponse.getUserAccount().getUserId();
+                    String userName = loginResponse.getUserAccount().getName();
+                    String userAgency = loginResponse.getUserAccount().getAgency();
+                    String userBankAccount = loginResponse.getUserAccount().getBankAccount();
+                    String userBalance = String.valueOf(loginResponse.getUserAccount().getBalance());
+
                     LoginSessionManager loginSessionManager = new LoginSessionManager(MainActivity.this);
-                    loginSessionManager.createLoginSession(user, password);
+                    loginSessionManager.createLoginSession(userId, user, userName, userAgency, userBankAccount, userBalance, password);
 
-                    Intent intent = new Intent(MainActivity.this, StatementActivity.class);
-                    intent.putExtra("userName", loginResponse.getUserAccount().getName());
-                    intent.putExtra("userAgency", loginResponse.getUserAccount().getAgency());
-                    intent.putExtra("userBankAccount", loginResponse.getUserAccount().getBankAccount());
-                    intent.putExtra("userBankBalance", loginResponse.getUserAccount().getBalance());
-
+                    Intent intent = new Intent(MainActivity.this, StatementsActivity.class);
                     startActivity(intent);
+
+                    MainActivity.this.finish();
                 } else {
-                    Toast.makeText(MainActivity.this, R.string.loginError, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.loginError, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -95,10 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.buttonLogin:
-                submitLogin();
-                break;
+        if (view.getId() == R.id.buttonLogin) {
+            submitLogin();
         }
     }
 
