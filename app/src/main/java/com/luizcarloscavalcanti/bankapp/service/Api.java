@@ -1,7 +1,10 @@
 package com.luizcarloscavalcanti.bankapp.service;
 
 import com.luizcarloscavalcanti.bankapp.model.LoginResponse;
+import com.luizcarloscavalcanti.bankapp.model.StatementList;
 import com.luizcarloscavalcanti.bankapp.model.StatementsResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -19,9 +22,8 @@ public interface Api {
             @Field("password") String password
     );
 
-    @FormUrlEncoded
     @GET("statements/{userId}")
-    Call<StatementsResponse> statements(
+    Call<StatementsResponse> getStatementsList(
             @Path("userId") int userId);
 
 }
