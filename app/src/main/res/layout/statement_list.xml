@@ -93,7 +93,7 @@
         android:layout_marginEnd="337dp"
         android:layout_marginBottom="18dp"
         android:fontFamily="@font/helvetica_neue"
-        android:text="@string/labelRecentes"
+        android:text="@string/labelRecents"
         android:textColor="#485465"
         android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/cardView2"
