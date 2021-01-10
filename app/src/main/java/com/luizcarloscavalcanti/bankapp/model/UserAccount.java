@@ -2,12 +2,10 @@ package com.luizcarloscavalcanti.bankapp.model;
 
 public class UserAccount {
 
-    private String name;
-    private Integer userId;
+    private String name, userId, agency, bankAccount;
     private Float balance;
-    private Long agency, bankAccount;
 
-    public UserAccount(String name, Integer userId, Long bankAccount, Long agency, Float balance) {
+    public UserAccount(String name, String userId, String bankAccount, String agency, Float balance) {
         this.name = name;
         this.userId = userId;
         this.bankAccount = bankAccount;
@@ -19,15 +17,15 @@ public class UserAccount {
         return name;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public Long getBankAccount() {
+    public String getBankAccount() {
         return bankAccount;
     }
 
-    public Long getAgency() {
+    public String getAgency() {
         return agency;
     }
 
