@@ -26,42 +26,42 @@
 
 
             <TextView
-                android:id="@+id/textOperacao"
+                android:id="@+id/textOperation"
                 android:layout_width="120dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/helvetica_neue"
-                android:text="@string/labelTitulo"
+                android:text="@string/labelTitle"
                 android:textColor="#A8B4C4"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textDescricaoOperacao"
+                android:id="@+id/textDescOperation"
                 android:layout_width="120dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="19dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/helvetica_neue"
-                android:text="@string/labelDescricao"
+                android:text="@string/labelDescription"
                 android:textColor="#485465"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textOperacao"
+                app:layout_constraintTop_toBottomOf="@+id/textOperation"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textData"
+                android:id="@+id/textDate"
                 android:layout_width="117dp"
                 android:layout_height="14dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/helvetica_neue"
-                android:text="@string/labelData"
+                android:text="@string/labelDate"
                 android:textAlignment="textEnd"
                 android:textColor="#A8B4C4"
                 android:textSize="12sp"
@@ -69,13 +69,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textValor"
+                android:id="@+id/textValue"
                 android:layout_width="184dp"
                 android:layout_height="23dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/helvetica_neue"
-                android:text="@string/labelValor"
+                android:text="@string/labelNumBalance"
                 android:textAlignment="textEnd"
                 android:textColor="#485465"
                 android:textSize="20sp"
@@ -83,23 +83,5 @@
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="67dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="337dp"
-        android:layout_marginBottom="18dp"
-        android:fontFamily="@font/helvetica_neue"
-        android:text="@string/labelRecents"
-        android:textColor="#485465"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.181"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
