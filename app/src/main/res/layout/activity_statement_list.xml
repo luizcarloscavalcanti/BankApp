@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StatementsActivity">
+
+    <TextView
+        android:id="@+id/labelRecents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:fontFamily="@font/helvetica_neue"
+        android:text="@string/labelRecents"
+        android:textColor="#485465"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/recentsRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintVertical_bias="0.483" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="480dp"
+        android:background="#3B49EE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageView
+            android:id="@+id/buttonLogout"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="335dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="165dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@mipmap/logout" />
+
+        <TextView
+            android:id="@+id/textNameUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="142dp"
+            android:layout_marginBottom="163dp"
+            android:fontFamily="@font/helvetica_neue"
+            android:text="@string/labelNameUser"
+            android:textColor="#FFF"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/labelAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="97dp"
+            android:layout_marginEnd="310dp"
+            android:layout_marginBottom="122dp"
+            android:fontFamily="@font/helvetica_neue"
+            android:text="@string/labelAccount"
+            android:textColor="#FFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textAccount"
+            android:layout_width="300dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="116dp"
+            android:layout_marginEnd="57dp"
+            android:layout_marginBottom="87dp"
+            android:fontFamily="@font/helvetica_neue"
+            android:text="@string/labelNumAccount"
+            android:textColor="#FFF"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/labelBalance"
+            android:layout_width="47dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="166dp"
+            android:fontFamily="@font/helvetica_neue"
+            android:text="@string/labelBalance"
+            android:textColor="#FFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textBalance"
+            android:layout_width="184dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="186dp"
+            android:fontFamily="@font/helvetica_neue"
+            android:text="@string/labelNumBalance"
+            android:textColor="#FFF"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recentsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
