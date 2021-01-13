@@ -63,7 +63,7 @@ public class StatementActivity extends AppCompatActivity implements View.OnClick
             textName.setText(sessionManager.getUserInfo("userName"));
             textAccount.setText(sessionManager.getUserInfo("userAccount") +
                     " / " + sessionManager.getUserInfo("userAgency"));
-            textBalance.setText(formatReal(sessionManager.getUserBalance()));
+            textBalance.setText((sessionManager.getUserBalance()));
 
             viewModel.apiCall(userID);
         } else {
@@ -79,11 +79,6 @@ public class StatementActivity extends AppCompatActivity implements View.OnClick
             sessionManager.logout();
             moveToMainActivity();
         }
-    }
-
-    public String formatReal(Float bankBalance) {
-        Locale ptBr = new Locale("pt", "BR");
-        return NumberFormat.getCurrencyInstance(ptBr).format(bankBalance);
     }
 
     private void moveToMainActivity() {

@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import com.luizcarloscavalcanti.bankapp.models.LoginModel;
 import com.luizcarloscavalcanti.bankapp.models.UserAccountModel;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
@@ -53,8 +55,9 @@ public class SessionManager {
         return sharedPreferences.getString(name, null);
     }
 
-    public Float getUserBalance(){
-        return sharedPreferences.getFloat(USER_BALANCE, 0);
+    public String getUserBalance(){
+            Locale ptBr = new Locale("pt", "BR");
+            return NumberFormat.getCurrencyInstance(ptBr).format(sharedPreferences.getFloat(USER_BALANCE, 0));
     }
 
     public boolean checkLogin(){
