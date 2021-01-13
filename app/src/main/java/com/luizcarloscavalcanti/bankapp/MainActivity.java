@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.luizcarloscavalcanti.bankapp.models.UserAccountModel;
 import com.luizcarloscavalcanti.bankapp.utils.SessionManager;
 import com.luizcarloscavalcanti.bankapp.utils.ValidateLogin;
 import com.luizcarloscavalcanti.bankapp.viewmodel.LoginViewModel;
