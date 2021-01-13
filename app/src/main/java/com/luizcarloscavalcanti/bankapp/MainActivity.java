@@ -13,9 +13,6 @@ import com.luizcarloscavalcanti.bankapp.utils.SessionManager;
 import com.luizcarloscavalcanti.bankapp.utils.ValidateLogin;
 import com.luizcarloscavalcanti.bankapp.viewmodel.LoginViewModel;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextUser, editTextPassword;
@@ -41,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sessionManager = new SessionManager(this);
         boolean isUserLoggedIn = sessionManager.checkLogin();
 
-        editTextUser.setText(sessionManager.loadUserInfos("user"));
+        editTextUser.setText(sessionManager.getUserInfo("user"));
 
         if(isUserLoggedIn) { moveToStatementActivity(); }
     }

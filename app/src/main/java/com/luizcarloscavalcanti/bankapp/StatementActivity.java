@@ -9,14 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.luizcarloscavalcanti.bankapp.adapter.StatementListAdapter;
 import com.luizcarloscavalcanti.bankapp.utils.SessionManager;
 import com.luizcarloscavalcanti.bankapp.viewmodel.StatementListViewModel;
 
 import java.text.NumberFormat;
-import java.util.HashMap;
 import java.util.Locale;
 
 public class StatementActivity extends AppCompatActivity implements View.OnClickListener {
@@ -62,9 +60,9 @@ public class StatementActivity extends AppCompatActivity implements View.OnClick
 
         if(sessionManager.checkLogin()){
             Integer userID = sessionManager.getUserId();
-            textName.setText(sessionManager.loadUserInfos("userName"));
-            textAccount.setText(sessionManager.loadUserInfos("userAccount") +
-                    " / " + sessionManager.loadUserInfos("userAgency"));
+            textName.setText(sessionManager.getUserInfo("userName"));
+            textAccount.setText(sessionManager.getUserInfo("userAccount") +
+                    " / " + sessionManager.getUserInfo("userAgency"));
             textBalance.setText(formatReal(sessionManager.getUserBalance()));
 
             viewModel.apiCall(userID);

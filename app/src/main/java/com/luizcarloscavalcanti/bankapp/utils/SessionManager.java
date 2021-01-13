@@ -49,7 +49,7 @@ public class SessionManager {
         return sharedPreferences.getInt(USER_ID, 0);
     }
 
-    public String loadUserInfos(String name){
+    public String getUserInfo(String name){
         return sharedPreferences.getString(name, null);
     }
 
