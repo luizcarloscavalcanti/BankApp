@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void moveToStatementActivity() {
-        Intent intent = new Intent(this, StatementActivity.class);
+        Intent intent = new Intent(getApplicationContext(), StatementActivity.class);
         startActivity(intent);
     }
 
