@@ -1,10 +1,7 @@
-package com.luizcarloscavalcanti.bankapp.service;
+package com.luizcarloscavalcanti.bankapp.services;
 
-import com.luizcarloscavalcanti.bankapp.model.LoginResponse;
-import com.luizcarloscavalcanti.bankapp.model.StatementList;
-import com.luizcarloscavalcanti.bankapp.model.StatementsResponse;
-
-import java.util.List;
+import com.luizcarloscavalcanti.bankapp.models.LoginModel;
+import com.luizcarloscavalcanti.bankapp.models.StatementModel;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -13,17 +10,17 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface Api {
+public interface ApiService {
 
     @FormUrlEncoded
     @POST("login")
-    Call<LoginResponse> login(
+    Call<LoginModel> postLogin(
             @Field("user") String user,
             @Field("password") String password
     );
 
     @GET("statements/{userId}")
-    Call<StatementsResponse> getStatementsList(
+    Call<StatementModel> getStatementList(
             @Path("userId") int userId);
 
 }

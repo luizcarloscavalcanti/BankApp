@@ -1,9 +1,9 @@
-package com.luizcarloscavalcanti.bankapp.model;
+package com.luizcarloscavalcanti.bankapp.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class StatementList {
+public class StatementListModel {
 
     @SerializedName("title")
     @Expose

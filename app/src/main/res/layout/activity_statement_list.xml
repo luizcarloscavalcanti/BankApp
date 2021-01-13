@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StatementsActivity">
+    tools:context=".StatementActivity">
 
     <TextView
         android:id="@+id/labelRecents"
@@ -25,8 +25,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="480dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="430dp"
         android:background="#3B49EE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@mipmap/logout" />
+            app:srcCompat="@mipmap/logout"
+            android:focusable="true"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/textNameUser"
@@ -102,7 +104,7 @@
             android:fontFamily="@font/helvetica_neue"
             android:text="@string/labelNumAccount"
             android:textColor="#FFF"
-            android:textSize="25dp"
+            android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -115,12 +117,13 @@
             android:layout_width="47dp"
             android:layout_height="13dp"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="166dp"
+            android:layout_marginTop="97dp"
             android:fontFamily="@font/helvetica_neue"
             android:text="@string/labelBalance"
             android:textColor="#FFF"
             android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -129,11 +132,12 @@
             android:layout_width="184dp"
             android:layout_height="29dp"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="186dp"
+            android:layout_marginTop="150dp"
             android:fontFamily="@font/helvetica_neue"
             android:text="@string/labelNumBalance"
             android:textColor="#FFF"
             android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,15 @@
-package com.luizcarloscavalcanti.bankapp.service;
+package com.luizcarloscavalcanti.bankapp.services;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static String BASE_URL = "https://bank-app-test.herokuapp.com/api/";
-    private static RetrofitClient retrofitClient;
     private static Retrofit retrofit;
+    private static RetrofitClient retrofitClient;
 
     private RetrofitClient() {
+        String BASE_URL = "https://bank-app-test.herokuapp.com/api/";
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -23,7 +23,7 @@ public class RetrofitClient {
         return retrofitClient;
     }
 
-    public Api getApi(){
-        return retrofit.create(Api.class);
+    public ApiService getApiService(){
+        return retrofit.create(ApiService.class);
     }
 }

@@ -13,4 +13,6 @@
     <string name="labelNumAccount">0000 / 00.000000-0</string>
     <string name="labelBalance">Saldo</string>
     <string name="labelNumBalance">R$0.000,00</string>
+    <string name="labelLoginError">Erro ao efetuar Login</string>
+    <string name="buttonLoginLabel">Login</string>
 </resources>

@@ -1,26 +1,28 @@
 package com.luizcarloscavalcanti.bankapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.luizcarloscavalcanti.bankapp.model.LoginResponse;
-import com.luizcarloscavalcanti.bankapp.service.RetrofitClient;
-import com.luizcarloscavalcanti.bankapp.service.LoginSessionManager;
+import com.luizcarloscavalcanti.bankapp.utils.SessionManager;
+import com.luizcarloscavalcanti.bankapp.utils.ValidateLogin;
+import com.luizcarloscavalcanti.bankapp.viewmodel.LoginViewModel;
 
-import java.util.HashMap;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText editTextUser, editTextPassword;
+    private EditText editTextUser, editTextPassword;
+    private TextView textLoginError;
+    private SessionManager sessionManager;
+    private LoginViewModel viewModel;
+    private ValidateLogin validateLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,80 +31,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         editTextUser = findViewById(R.id.editTextUser);
         editTextPassword = findViewById(R.id.editTextPassword);
+        textLoginError = findViewById(R.id.textLoginError);
         findViewById(R.id.buttonLogin).setOnClickListener(this);
-
-        LoginSessionManager loginSessionManager = new LoginSessionManager(MainActivity.this);
-        HashMap<String, String> loginDetails = loginSessionManager.getLoginDetail();
-
-        editTextUser.setText(loginDetails.get(LoginSessionManager.USER));
-
-        if (loginSessionManager.checkLogin()) {
-            Intent intent = new Intent(MainActivity.this, StatementsActivity.class);
-            startActivity(intent);
-            this.finish();
-        }
     }
 
-    private void submitLogin() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        sessionManager = new SessionManager(this);
+        boolean isUserLoggedIn = sessionManager.checkLogin();
+
+        editTextUser.setText(sessionManager.loadUserInfos("user"));
+
+        if(isUserLoggedIn) { moveToStatementActivity(); }
+    }
+
+    private void login() {
+        validateLogin = new ValidateLogin();
         String user = editTextUser.getText().toString();
         String password = editTextPassword.getText().toString();
 
-        Call<LoginResponse> call = RetrofitClient.getRetrofitInstance()
-                .getApi()
-                .login(user, password);
+        if(validateLogin.isValidLogin(user, password)) {
+            viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+            viewModel.getStatementList().observe(this, userAccountModel -> {
+                Integer userId = userAccountModel.getUserId();
+                String userName = userAccountModel.getName();
+                String bankAgency = userAccountModel.getAgency();
+                String bankAccount = userAccountModel.getBankAccount();
+                Float bankBalance = userAccountModel.getBalance();
 
-        call.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                LoginResponse loginResponse = response.body();
+                sessionManager.createSession(user, password, userId, userName, bankAgency, bankAccount, bankBalance);
 
-                if (validatePassword(password) && validateUser(user)) {
-                    assert loginResponse != null;
-                    String userId = loginResponse.getUserAccount().getUserId();
-                    String userName = loginResponse.getUserAccount().getName();
-                    String userAgency = loginResponse.getUserAccount().getAgency();
-                    String userBankAccount = loginResponse.getUserAccount().getBankAccount();
-                    String userBalance = String.valueOf(loginResponse.getUserAccount().getBalance());
+                moveToStatementActivity();
+            });
+            viewModel.apiCall(user, password);
 
-                    LoginSessionManager loginSessionManager = new LoginSessionManager(MainActivity.this);
-                    loginSessionManager.createLoginSession(userId, user, userName, userAgency, userBankAccount, userBalance, password);
-
-                    Intent intent = new Intent(MainActivity.this, StatementsActivity.class);
-                    startActivity(intent);
-
-                    MainActivity.this.finish();
-                } else {
-                    Toast.makeText(MainActivity.this, R.string.loginError, Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {}
-        });
-    }
-
-    public static boolean validateUser(String user) {
-
-        String CPF_REGEX = "(^[0-9]+$)";
-        String EMAIL_REGEX = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-
-        boolean validateCPF = user.matches(CPF_REGEX) && user.length() == 11;
-        boolean validateEmail = user.matches(EMAIL_REGEX);
-
-        return validateCPF || validateEmail;
-    }
-
-    public static boolean validatePassword(String password) {
-
-        String PASSWORD_REGEX = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
-
-        return password.matches(PASSWORD_REGEX);
+        } else {
+            textLoginError.setVisibility(View.VISIBLE);
+            textLoginError.setText(R.string.loginError);
+        }
     }
 
     public void onClick(View view) {
         if (view.getId() == R.id.buttonLogin) {
-            submitLogin();
+            login();
         }
     }
 
+    private void moveToStatementActivity() {
+        Intent intent = new Intent(this, StatementActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.finish();
+    }
 }

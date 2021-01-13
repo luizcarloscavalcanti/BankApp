@@ -1,24 +1,24 @@
-package com.luizcarloscavalcanti.bankapp.model;
+package com.luizcarloscavalcanti.bankapp.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class StatementsResponse {
+public class StatementModel {
 
         @SerializedName("statementList")
         @Expose
-        private List<StatementList> statementList = null;
+        private List<StatementListModel> statementList = null;
         @SerializedName("error")
         @Expose
-        private Error error;
+        private ErrorModel error;
 
-        public List<StatementList> getStatementList() {
+        public List<StatementListModel> getStatementList() {
             return statementList;
         }
 
-        public Error getError() {
+        public ErrorModel getError() {
             return error;
         }
 

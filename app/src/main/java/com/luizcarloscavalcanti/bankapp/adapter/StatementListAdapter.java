@@ -2,18 +2,16 @@ package com.luizcarloscavalcanti.bankapp.adapter;
 
 
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luizcarloscavalcanti.bankapp.R;
-import com.luizcarloscavalcanti.bankapp.model.StatementList;
+import com.luizcarloscavalcanti.bankapp.models.StatementListModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -23,15 +21,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.MyViewHolder> {
+public class StatementListAdapter extends RecyclerView.Adapter<StatementListAdapter.MyViewHolder> {
 
-    private Context mContext;
-    private List<StatementList> statementListsData;
+    private final Context mContext;
+    private List<StatementListModel> statementsList;
 
-    public StatementAdapter(Context mContext) {
+    public StatementListAdapter(Context mContext) {
         this.mContext = mContext;
-        statementListsData = new ArrayList<>();
+        statementsList = new ArrayList<>();
+    }
 
+    public void addStatementList(List<StatementListModel> statementListModels) {
+        this.statementsList = statementListModels;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -50,43 +52,35 @@ public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.MyVi
         SimpleDateFormat unformattedPattern = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formattedPattern = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            Date date = unformattedPattern.parse(statementListsData.get(position).getDate());
-            holder.text_date.setText(formattedPattern.format(date));
+            Date date = unformattedPattern.parse(statementsList.get(position).getDate());
+            holder.textDate.setText(formattedPattern.format(date));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         Locale ptBr = new Locale("pt", "BR");
-        String ptBrBalance = NumberFormat.getCurrencyInstance(ptBr).format(statementListsData.get(position).getValue());
+        String ptBrBalance = NumberFormat.getCurrencyInstance(ptBr)
+                .format(statementsList.get(position).getValue());
 
-        holder.text_title.setText(statementListsData.get(position).getTitle());
-        holder.text_description.setText(statementListsData.get(position).getDesc());
-        holder.text_value.setText(ptBrBalance);
-
+        holder.textOperationTitle.setText(statementsList.get(position).getTitle());
+        holder.textDescription.setText(statementsList.get(position).getDesc());
+        holder.textValue.setText(ptBrBalance);
     }
 
     @Override
-    public int getItemCount() {
-        return statementListsData.size();
-    }
-
-    public void addStatementList(List<StatementList> statementLists) {
-        statementListsData.addAll(statementLists);
-        notifyDataSetChanged();
-    }
+    public int getItemCount() { return statementsList.size(); }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView text_title, text_description, text_value, text_date;
+        TextView textOperationTitle, textDescription, textValue, textDate;
 
         public MyViewHolder(View itemView){
             super(itemView);
 
-            text_title = itemView.findViewById(R.id.textOperation);
-            text_description = itemView.findViewById(R.id.textDescOperation);
-            text_date = itemView.findViewById(R.id.textDate);
-            text_value = itemView.findViewById(R.id.textValue);
-
+            textOperationTitle = itemView.findViewById(R.id.textOperation);
+            textDescription = itemView.findViewById(R.id.textDescOperation);
+            textDate = itemView.findViewById(R.id.textDate);
+            textValue = itemView.findViewById(R.id.textValue);
         }
     }
 }

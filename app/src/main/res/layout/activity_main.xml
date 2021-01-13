@@ -47,6 +47,7 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:cursorVisible="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +65,24 @@
         android:shadowColor="#3B48EE"
         android:shadowDy="3"
         android:shadowRadius="30"
-        android:text="Login"
+        android:text="@string/buttonLoginLabel"
         app:backgroundTint="#3B48EE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textLoginError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="300dp"
+        android:textColor="#FA0000"
+        android:visibility="gone"
+        android:text="@string/labelLoginError"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

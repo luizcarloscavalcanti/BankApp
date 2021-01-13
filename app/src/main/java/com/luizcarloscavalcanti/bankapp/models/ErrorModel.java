@@ -1,9 +1,9 @@
-package com.luizcarloscavalcanti.bankapp.model;
+package com.luizcarloscavalcanti.bankapp.models;
 
-public class Error {
+public class ErrorModel {
     private String code, message;
 
-    public Error(String code, String message) {
+    public ErrorModel(String code, String message) {
         this.code = code;
         this.message = message;
     }

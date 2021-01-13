@@ -1,11 +1,12 @@
-package com.luizcarloscavalcanti.bankapp.model;
+package com.luizcarloscavalcanti.bankapp.models;
 
-public class UserAccount {
+public class UserAccountModel {
 
-    private String name, userId, agency, bankAccount;
+    private Integer userId;
+    private String name, agency, bankAccount;
     private Float balance;
 
-    public UserAccount(String name, String userId, String bankAccount, String agency, Float balance) {
+    public UserAccountModel(Integer userId, String name, String bankAccount, String agency, Float balance) {
         this.name = name;
         this.userId = userId;
         this.bankAccount = bankAccount;
@@ -17,7 +18,7 @@ public class UserAccount {
         return name;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
